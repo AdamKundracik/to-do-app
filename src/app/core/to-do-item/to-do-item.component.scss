@@ -1,0 +1,44 @@
+.container {
+  min-height: 50px;
+  height: auto;
+  width: 100%;
+  background-color: #363636;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 0px;
+  color: white;
+  filter: drop-shadow(0px 0px 2px rgba(255,255,255,0.5));
+
+}
+
+.title {
+  margin: auto;
+  width: 20%;
+  padding-left: 10px;
+}
+
+.text {
+  margin: auto;
+  padding: 0 20px;
+  width: 65%;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 5%;
+  padding: 0 20px;
+
+  ::ng-deep .mat-checkbox-frame {
+    border-color: white
+  }
+}
+
+.until {
+  margin: auto;
+  width: 20%;
+  padding-left: 20px;
+}

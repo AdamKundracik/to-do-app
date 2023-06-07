@@ -1,0 +1,63 @@
+:host {
+  margin: auto;
+}
+
+.container {
+  padding-top: 100px;
+  width: 100%; //width auto pre mobil
+  min-height: 500px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+
+  .add-button {
+    margin: 0 auto;
+
+  }
+}
+
+.legend-row {
+  //min-height: 50px;
+  //height: auto;
+  width: 100%;
+  //background-color: #363636;
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 20px;
+  color: white;
+
+}
+
+.title {
+  margin: auto;
+  width: 20%
+}
+
+.text {
+  margin: auto;
+  padding: 0 20px;
+  width: 55%;
+}
+
+.checkbox {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  width: 5%;
+  padding: 0 20px;
+
+  ::ng-deep .mat-checkbox-frame {
+    border-color: white
+  }
+}
+
+.until {
+  margin: auto;
+  width: 20%;
+  padding-left: 20px;
+}
+
+
+
+

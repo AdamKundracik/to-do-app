@@ -2,8 +2,10 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+
 export const environment = {
-  production: false
+  production: false,
+  MOCK_API: 'https://647e149eaf984710854ae9b6.mockapi.io'
 };
 
 /*

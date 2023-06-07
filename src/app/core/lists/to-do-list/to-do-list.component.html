@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="add-button">
+    <button mat-mini-fab color="primary">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="legend-row">
+    <div class="title">
+      TITLE
+    </div>
+    <div class="text">
+      <span>TEXT</span>
+    </div>
+    <div class="checkbox">
+      DONE
+    </div>
+    <div class="until">
+      UNTIL
+    </div>
+  </div>
+  <ng-container *ngFor="let item of openedCategory?.toDoList">
+    <app-to-do-item [title]="item?.title!"
+    [text]="item?.text!" [until]="item?.doUntil!"></app-to-do-item>
+  </ng-container>
+
+
+</div>
+

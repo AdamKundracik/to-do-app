@@ -1,0 +1,6 @@
+<div class="container">
+  <div class="text"><span>CATEGORIES</span></div>
+  <ng-container *ngFor="let category of categoryData">
+    <app-category-item [title]="category.title" (click)="navigateToCategory(category?.id!)"></app-category-item>
+  </ng-container>
+</div>

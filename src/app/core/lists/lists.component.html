@@ -1,0 +1,14 @@
+<div class="container">
+  <ng-container *ngIf="param === ''; else list">
+    <app-to-do-category [categoryData]="categoryData"></app-to-do-category>
+  </ng-container>
+
+  <ng-template #list>
+    <app-to-do-list [categoryData]="categoryData"
+                    [id]="param">
+    </app-to-do-list>
+  </ng-template>
+</div>
+
+
+
