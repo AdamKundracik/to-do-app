@@ -10,6 +10,8 @@ import { ToDoCategoryComponent } from './lists/to-do-category/to-do-category.com
 import {MatIconModule} from "@angular/material/icon";
 import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatInputModule} from "@angular/material/input";
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import {MatButtonModule} from "@angular/material/button";
     MatCheckboxModule,
     MatIconModule,
     HttpClientModule,
-    MatButtonModule
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule
   ]
 })
 export class CoreModule { }

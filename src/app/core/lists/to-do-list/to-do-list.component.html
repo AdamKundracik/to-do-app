@@ -1,6 +1,9 @@
 <div class="container">
   <div class="add-button">
-    <button mat-mini-fab color="primary">
+    <button mat-mini-fab color="primary" class="back" [routerLink]="['/']">
+      <mat-icon>undo</mat-icon>
+    </button>
+    <button mat-mini-fab color="primary" (click)="openTempDialog()">
       <mat-icon>add</mat-icon>
     </button>
   </div>
@@ -22,7 +25,24 @@
     <app-to-do-item [title]="item?.title!"
     [text]="item?.text!" [until]="item?.doUntil!"></app-to-do-item>
   </ng-container>
-
-
 </div>
 
+<ng-template #dialogRef>
+  <form>
+    <div class="form-container">
+      <mat-form-field class="example-full-width">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="title">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Text</mat-label>
+        <input matInput placeholder="text">
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <mat-label>Do until</mat-label>
+        <input matInput placeholder="do until">
+      </mat-form-field>
+      <button mat-raised-button color="primary">Add</button>
+    </div>
+  </form>
+</ng-template>
