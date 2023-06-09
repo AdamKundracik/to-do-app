@@ -6,7 +6,6 @@
   padding-top: 100px;
   width: 700px; //width auto pre mobil
   max-width: 700px;
-  min-height: 500px;
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
@@ -20,10 +19,7 @@
 }
 
 .legend-row {
-  //min-height: 50px;
-  //height: auto;
   width: 100%;
-  //background-color: #363636;
   margin-bottom: 12px;
   display: flex;
   flex-direction: row;
@@ -59,15 +55,44 @@
   width: 20%;
 }
 
-@media only screen and (max-width: 768px) {
-  .container {
-    width: auto;
-  }
-}
-
-
 .form-container {
   display: flex;
   flex-direction: column;
 }
+
+.datepicker {
+  transform: translateY(30px);
+}
+
+mat-label {
+  transform: translateY(30px);
+}
+
+.mat-datepicker-toggle {
+  display: flex;
+  justify-content: end;
+}
+
+.add-text {
+  margin-bottom: 15px;
+}
+
+.category {
+  margin: auto;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: white;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+
+  .delete {
+    margin-left: 5px;
+  }
+}
+
 

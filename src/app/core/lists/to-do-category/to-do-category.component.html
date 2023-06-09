@@ -1,6 +1,26 @@
 <div class="container">
+    <div class="add-button">
+      <button mat-mini-fab color="primary" (click)="openTempDialog()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
   <div class="text"><span>CATEGORIES</span></div>
   <ng-container *ngFor="let category of categoryData">
     <app-category-item [title]="category.title" (click)="navigateToCategory(category?.id!)"></app-category-item>
   </ng-container>
 </div>
+
+<ng-template #dialogRef>
+  <form [formGroup]="createCategoryForm" (ngSubmit)="onCategoryCreate()">
+    <div class="add-text">
+      <span>CREATE NEW CATEGORY</span>
+    </div>
+    <div class="form-container">
+      <mat-form-field class="example-full-width">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="title" formControlName="title">
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">Add</button>
+    </div>
+  </form>
+</ng-template>

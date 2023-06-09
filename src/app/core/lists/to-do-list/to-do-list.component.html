@@ -1,4 +1,7 @@
 <div class="container">
+  <div class="category">
+    {{openedCategory?.title}}
+  </div>
   <div class="add-button">
     <button mat-mini-fab color="primary" class="back" [routerLink]="['/']">
       <mat-icon>undo</mat-icon>
@@ -22,27 +25,38 @@
     </div>
   </div>
   <ng-container *ngFor="let item of openedCategory?.toDoList">
-    <app-to-do-item [title]="item?.title!"
-    [text]="item?.text!" [until]="item?.doUntil!"></app-to-do-item>
+    <app-to-do-item
+    [title]="item?.title!"
+    [text]="item?.text!" [until]="item?.doUntil!"
+    [id]="item?.id!.toString()"
+    [categoryId]="id"
+    (deletedItem)="deletedToDoItem.emit($event)"
+    ></app-to-do-item>
   </ng-container>
 </div>
 
 <ng-template #dialogRef>
-  <form>
+  <form [formGroup]="createTaskForm" (ngSubmit)="onCreateFormSubmit()">
+    <div class="add-text">
+      <span>CREATE NEW TASK</span>
+    </div>
     <div class="form-container">
       <mat-form-field class="example-full-width">
         <mat-label>Title</mat-label>
-        <input matInput placeholder="title">
+        <input matInput placeholder="title" formControlName="title">
       </mat-form-field>
       <mat-form-field class="example-full-width">
         <mat-label>Text</mat-label>
-        <input matInput placeholder="text">
+        <input matInput placeholder="text" formControlName="text">
       </mat-form-field>
-      <mat-form-field class="example-full-width">
-        <mat-label>Do until</mat-label>
-        <input matInput placeholder="do until">
+      <mat-form-field>
+        <mat-label>Choose a date</mat-label>
+        <input class="datepicker" matInput [matDatepicker]="picker" formControlName="doUntil">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
-      <button mat-raised-button color="primary">Add</button>
+      <button mat-raised-button color="primary" type="submit">Add</button>
     </div>
   </form>
 </ng-template>

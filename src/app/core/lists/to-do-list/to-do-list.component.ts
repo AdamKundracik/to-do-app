@@ -1,18 +1,32 @@
-import {Component, Input, OnChanges, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component, EventEmitter,
+  Input,
+  OnInit, Output,
+  TemplateRef,
+  ViewChild
+} from '@angular/core';
 import {Category} from "../../models/category.model";
 import {MatDialog} from "@angular/material/dialog";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ToDoService} from "../../shared/services/to-do.service";
+import {ToDoList} from "../../models/toDoList.model";
+import {ToastrService} from "ngx-toastr";
 
 @Component({
   selector: 'app-to-do-list',
   templateUrl: './to-do-list.component.html',
-  styleUrls: ['./to-do-list.component.scss']
+  styleUrls: ['./to-do-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ToDoListComponent implements OnInit {
 
-  private _categoryData: Category[] = [];
   get categoryData() {
     return this._categoryData;
   }
+
+  /*Inputs*/
   @Input() set categoryData(categoryData: Category[]) {
     if (categoryData) {
       this._categoryData = categoryData;
@@ -22,8 +36,29 @@ export class ToDoListComponent implements OnInit {
   }
   @Input() id: string = '';
 
+  /*Outputs*/
+  @Output() toDoItem = new EventEmitter<ToDoList>();
+  @Output() deletedToDoItem= new EventEmitter<ToDoList>();
+
+  /*Variables*/
   public openedCategory?: Category;
-  constructor(public dialog: MatDialog) { }
+  private _categoryData: Category[] = [];
+
+  public createTaskForm: FormGroup = this.fb.group({
+    title: new FormControl('', [Validators.required]),
+    text: new FormControl('', [Validators.required]),
+    isDone: new FormControl(false),
+    doUntil: new FormControl(null, Validators.required),
+    isExpired: new FormControl(false),
+  })
+
+  constructor(
+    public dialog: MatDialog,
+    private fb: FormBuilder,
+    private readonly toDoService: ToDoService,
+    private readonly cd: ChangeDetectorRef,
+    private readonly toastr: ToastrService,
+  ) { }
 
   ngOnInit(): void {
     console.log(this.id)
@@ -32,17 +67,29 @@ export class ToDoListComponent implements OnInit {
   @ViewChild('dialogRef')
   dialogRef!: TemplateRef<any>;
 
-  myFooList = ['Some Item', 'Item Second', 'Other In Row', 'What to write', 'Blah To Do']
-
-
 
   openTempDialog() {
-    const myTempDialog = this.dialog.open(this.dialogRef, { data: this.myFooList });
-    myTempDialog.afterClosed().subscribe((res) => {
+    const myTempDialog = this.dialog.open(this.dialogRef, {height: "350px", width: "400px"});
+  }
 
-      // Data back from dialog
-      console.log({ res });
-    });
+  public onCreateFormSubmit(): void {
+    if (this.createTaskForm.valid) {
+      const date = this.createTaskForm.get('doUntil')?.value
+      const unixTime = Math.floor(date.getTime() / 1000) + 86399;
+      console.log(unixTime);
+      this.createTaskForm.get('doUntil')?.setValue(unixTime);
+      this.toDoService.createTaskInCategory(this.createTaskForm.value, this.id).subscribe({
+        next: value => {
+          if (value) {
+            this.toDoItem.emit(value);
+            this.toastr.success("New item successfully added!");
+            this.dialog.closeAll();
+          }
+        }
+      });
+    } else {
+      console.log("INVALID")
+    }
   }
 
 

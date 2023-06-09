@@ -9,6 +9,11 @@
     <mat-checkbox></mat-checkbox>
   </div>
   <div class="until">
-    {{until + '000' | date: 'MMMM d, y, hh:mm:ss'}}
+    {{until + '000' | date: 'MMMM d, y'}}
+  </div>
+  <div class="delete">
+    <button mat-icon-button (click)="onDelete(id)">
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
 </div>

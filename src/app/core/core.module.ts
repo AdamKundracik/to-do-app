@@ -12,6 +12,12 @@ import {HttpClientModule} from "@angular/common/http";
 import {MatButtonModule} from "@angular/material/button";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatInputModule} from "@angular/material/input";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatNativeDateModule} from "@angular/material/core";
+import {ReactiveFormsModule} from "@angular/forms";
+import {ToastrModule} from "ngx-toastr";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -31,7 +37,12 @@ import {MatInputModule} from "@angular/material/input";
     HttpClientModule,
     MatButtonModule,
     MatDialogModule,
-    MatInputModule
+    MatFormFieldModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    ReactiveFormsModule,
   ]
 })
 export class CoreModule { }

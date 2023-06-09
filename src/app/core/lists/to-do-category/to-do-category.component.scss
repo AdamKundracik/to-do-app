@@ -4,12 +4,15 @@
 
 .container {
   padding-top: 100px;
-  width: 250px;
-  min-height: 500px;
+  width: 300px;
   margin-bottom: 50px;
   display: flex;
   flex-direction: column;
 
+  .add-button {
+    margin: 0 auto;
+    margin-bottom: 20px;
+  }
   .text {
     margin: 0 auto;
     margin-bottom: 20px;
@@ -18,4 +21,17 @@
       color: white;
     }
   }
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+
+@media only screen and (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+
 }

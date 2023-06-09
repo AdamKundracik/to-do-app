@@ -13,4 +13,8 @@ export class CategoryItemComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  public log() {
+    console.log("clicked")
+  }
 }
