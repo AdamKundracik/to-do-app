@@ -49,10 +49,13 @@ export class ToDoCategoryComponent implements OnInit {
       this.toDoService.createCategory(this.createCategoryForm.value).subscribe({
         next: value => {
           this.addedCategory.emit(value);
-          this.toastr.success("ADDED");
+          this.toastr.success("Category CREATED!");
           this.dialog.closeAll();
         }
       })
+    } else {
+      this.toastr.error("Form is INVALID!")
+
     }
   }
 

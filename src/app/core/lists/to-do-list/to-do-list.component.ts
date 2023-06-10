@@ -88,7 +88,7 @@ export class ToDoListComponent implements OnInit {
         }
       });
     } else {
-      console.log("INVALID")
+      this.toastr.error("Form is INVALID!")
     }
   }
 
