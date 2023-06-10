@@ -5,12 +5,17 @@ import {ListsComponent} from "./lists/lists.component";
 
 const routes: Routes = [
   {
-    path: "",
+    path: "categories",
     component: ListsComponent
   },
   {
-    path: ":id",
+    path: "categories/:id",
     component: ListsComponent
+  },
+  {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: "categories",
   },
 ];
 

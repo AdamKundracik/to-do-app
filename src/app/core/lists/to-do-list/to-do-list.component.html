@@ -30,9 +30,36 @@
     [text]="item?.text!" [until]="item?.doUntil!"
     [id]="item?.id!.toString()"
     [categoryId]="id"
+    [isDone]="item?.isDone!"
     (deletedItem)="deletedToDoItem.emit($event)"
+    (changedItem)="markAsDone($event)"
     ></app-to-do-item>
   </ng-container>
+<!--TODO: Separate Done and not done items using Inputs-->
+<!--  <div>-->
+<!--    NOT DONE-->
+<!--    <ng-container *ngFor="let item of openedCategory?.toDoList">-->
+<!--      <app-to-do-item *ngIf="!item.isDone"-->
+<!--                      [title]="item?.title!"-->
+<!--                      [text]="item?.text!" [until]="item?.doUntil!"-->
+<!--                      [id]="item?.id!.toString()"-->
+<!--                      [categoryId]="id"-->
+<!--                      (deletedItem)="deletedToDoItem.emit($event)"-->
+<!--      ></app-to-do-item>-->
+<!--    </ng-container>-->
+<!--  </div>-->
+<!--  <div>-->
+<!--    DONE-->
+<!--    <ng-container *ngFor="let item of openedCategory?.toDoList">-->
+<!--      <app-to-do-item *ngIf="item.isDone"-->
+<!--                      [title]="item?.title!"-->
+<!--                      [text]="item?.text!" [until]="item?.doUntil!"-->
+<!--                      [id]="item?.id!.toString()"-->
+<!--                      [categoryId]="id"-->
+<!--                      (deletedItem)="deletedToDoItem.emit($event)"-->
+<!--      ></app-to-do-item>-->
+<!--    </ng-container>-->
+<!--  </div>-->
 </div>
 
 <ng-template #dialogRef>

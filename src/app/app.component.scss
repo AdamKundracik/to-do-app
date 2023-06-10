@@ -6,6 +6,7 @@
   height: 50px;
   background-color: #464343;
   display: flex;
+  justify-content: space-between;
 
   & > * {
     margin: auto 0;
@@ -15,6 +16,10 @@
     padding: 0 15px ;
     color: white;
     font-size: 20px;
+  }
+
+  .button {
+    padding-right: 15px;
   }
 }
 

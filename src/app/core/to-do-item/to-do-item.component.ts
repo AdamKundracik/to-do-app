@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {ToDoService} from "../shared/services/to-do.service";
+import {ToDoService} from "../../shared/services/to-do.service";
 import {ToDoList} from "../models/toDoList.model";
 
 @Component({
@@ -10,12 +10,14 @@ import {ToDoList} from "../models/toDoList.model";
 export class ToDoItemComponent implements OnInit {
 
   @Output() deletedItem = new EventEmitter<ToDoList>();
+  @Output() changedItem = new EventEmitter<{id: string, value: boolean}>();
 
   @Input() title: string = "";
   @Input() text: string = "";
   @Input() until: Date = new Date();
   @Input() id: string = "";
   @Input() categoryId: string = "";
+  @Input() isDone: boolean = false;
 
   constructor(
     private readonly toDoService: ToDoService
@@ -32,4 +34,11 @@ export class ToDoItemComponent implements OnInit {
       }
     });
   }
+
+  public onMarkAsDone(id: string, value: boolean) {
+    this.changedItem.emit({id: id, value: value});
+    // this.toDoService.markToDoItemAsDone(this.categoryId, id, )
+  }
+
+  protected readonly Number = Number;
 }

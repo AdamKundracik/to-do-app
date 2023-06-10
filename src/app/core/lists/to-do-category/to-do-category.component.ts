@@ -3,7 +3,7 @@ import {Category} from "../../models/category.model";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ToDoService} from "../../shared/services/to-do.service";
+import {ToDoService} from "../../../shared/services/to-do.service";
 import {ToastrService} from "ngx-toastr";
 
 @Component({
@@ -41,7 +41,7 @@ export class ToDoCategoryComponent implements OnInit {
   }
 
   public navigateToCategory(id: string): void {
-    this.router.navigateByUrl(`${id}`);
+    this.router.navigateByUrl(`categories/${id}`);
   }
 
   public onCategoryCreate() {

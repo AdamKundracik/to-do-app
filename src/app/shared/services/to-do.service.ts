@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {environment} from "../../../../environments/environment";
-import {Category} from "../../models/category.model";
+import {environment} from "../../../environments/environment";
+import {Category} from "../../core/models/category.model";
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
-import {ToDoList} from "../../models/toDoList.model";
+import {ToDoList} from "../../core/models/toDoList.model";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +29,10 @@ export class ToDoService {
 
   public createCategory(category: Category): Observable<Category> {
     return this.http.post<Category>(`${this.MOCK_API}/toDoCategory`, category);
+  }
+
+  public markToDoItemAsDone(categoryId: string, id: string, item: ToDoList): Observable<ToDoList> {
+    return this.http.put<ToDoList>(`${this.MOCK_API}/toDoCategory/${categoryId}/toDoItem/${id}`, item);
   }
 
 }

@@ -10,7 +10,7 @@ import {
 import {Category} from "../../models/category.model";
 import {MatDialog} from "@angular/material/dialog";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
-import {ToDoService} from "../../shared/services/to-do.service";
+import {ToDoService} from "../../../shared/services/to-do.service";
 import {ToDoList} from "../../models/toDoList.model";
 import {ToastrService} from "ngx-toastr";
 
@@ -92,5 +92,25 @@ export class ToDoListComponent implements OnInit {
     }
   }
 
+  public markAsDone(toDoItem: {id: string, value: boolean}) {
+    const item: ToDoList = this.openedCategory?.toDoList.find(val => val.id.toString() === toDoItem.id)!;
+    const updatedItem = {...item, isDone: toDoItem.value};
+    this.toDoService.markToDoItemAsDone(this.openedCategory?.id!, toDoItem.id, updatedItem).subscribe({
+      next: value => {
+        if (value) {
+          if (value.isDone) {
+            this.toastr.success("Marked as DONE!")
+          } else {
+            this.toastr.success("Marked as NOT DONE!")
+
+          }
+
+        } else {
+          this.toastr.error("Something went wrong!")
+
+        }
+      }
+    });
+  }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {ToDoService} from "../shared/services/to-do.service";
+import {ToDoService} from "../../shared/services/to-do.service";
 import {Category} from "../models/category.model";
 import {ToDoList} from "../models/toDoList.model";
 
@@ -28,7 +28,6 @@ export class ListsComponent implements OnInit {
     this.toDoService.getCategoriesWithList().subscribe({
       next: value => {
         this.categoryData = value;
-        console.log("DATA",this.categoryData);
       }
     })
   }

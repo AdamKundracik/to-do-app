@@ -1,5 +1,10 @@
 <div class="header">
   <div class="logo">TO DO APP</div>
+  <div class="button" *ngIf="authService.isLoggedIn$ | async">
+    <button mat-icon-button (click)="logoutUser()">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
 </div>
 <div class="container">
   <router-outlet></router-outlet>

@@ -6,7 +6,7 @@
    <span>{{text}}</span>
   </div>
   <div class="checkbox">
-    <mat-checkbox></mat-checkbox>
+    <mat-checkbox [(ngModel)]="isDone" (change)="onMarkAsDone(id, $event.checked)"></mat-checkbox>
   </div>
   <div class="until">
     {{until + '000' | date: 'MMMM d, y'}}
