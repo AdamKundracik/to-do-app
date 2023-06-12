@@ -51,6 +51,7 @@ export class ToDoCategoryComponent implements OnInit {
         next: value => {
           this.addedCategory.emit(value);
           this.toastr.success("Category CREATED!");
+          this.createCategoryForm.reset();
           this.dialog.closeAll();
         }
       })

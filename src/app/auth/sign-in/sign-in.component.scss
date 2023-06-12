@@ -21,6 +21,10 @@
     .mat-card-content {
       display: flex;
       flex-direction: column;
+
+      .mat-form-field {
+        margin-bottom: 5px;
+      }
     }
 
     .mat-card-footer {

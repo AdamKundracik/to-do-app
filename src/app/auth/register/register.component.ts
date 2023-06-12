@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth.service";
 import {Router} from "@angular/router";
+import {matchValidator} from "./validator/register-validators";
 
 @Component({
   selector: 'app-register',
@@ -18,8 +19,17 @@ export class RegisterComponent implements OnInit {
   }
 
   public signUpForm = this.fb.group({
-    email: ['', Validators.required],
-    password: ['', Validators.required]
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [
+      Validators.required,
+      Validators.minLength(8),
+      Validators.maxLength(25),
+      matchValidator('againPassword', true)
+    ]],
+    againPassword: ['', [
+      Validators.required,
+      matchValidator('password')
+    ]],
   })
 
   ngOnInit(): void {

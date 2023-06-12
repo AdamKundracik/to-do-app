@@ -61,8 +61,8 @@ export class ToDoListComponent implements OnInit {
   }
 
   public createTaskForm: FormGroup = this.fb.group({
-    title: new FormControl('', [Validators.required]),
-    text: new FormControl('', [Validators.required]),
+    title: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
+    text: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
     isDone: new FormControl(false),
     doUntil: new FormControl(null, Validators.required),
     isExpired: new FormControl(false),
@@ -144,6 +144,7 @@ export class ToDoListComponent implements OnInit {
           if (value) {
             this.toDoItem.emit(value);
             this.toastr.success("New item successfully added!");
+            this.createTaskForm.reset();
             this.dialog.closeAll();
           }
         }
@@ -256,6 +257,10 @@ export class ToDoListComponent implements OnInit {
   public clearFilter(filterInput: HTMLInputElement): void {
     filterInput.value = '';
     this.itemFilter$.next('');
+  }
+
+  public noWhitespaceValidator(control: FormControl) {
+    return (control.value || '').trim().length? null : { 'whitespace': true };
   }
 
 }

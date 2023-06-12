@@ -16,8 +16,9 @@
       <span>CREATE NEW CATEGORY</span>
     </div>
     <div class="form-container">
-      <mat-form-field class="example-full-width">
+      <mat-form-field>
         <mat-label>Title</mat-label>
+        <mat-error *ngIf="createCategoryForm.get('title')?.invalid">Can not be whitespaces only</mat-error>
         <input matInput placeholder="title" formControlName="title">
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">Add</button>

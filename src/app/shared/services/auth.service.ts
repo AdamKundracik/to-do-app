@@ -35,12 +35,10 @@ export class AuthService {
     return this.afAuth
       .createUserWithEmailAndPassword(email, password)
       .then((result) => {
-        window.alert('You have been successfully registered!');
-        console.log(result.user);
+        this.toastr.success("Signed Up!");
       })
       .catch((error) => {
-        window.alert(error.message);
-        this.toastr.error("Check if your email and password are correct")
+        this.toastr.error("Check if your email is correct")
       });
   }
 
@@ -51,13 +49,13 @@ export class AuthService {
       .then((result) => {
         if (result?.user?.refreshToken) {
           this.setToken(result?.user?.refreshToken);
-          this.toastr.success("Logged in");
+          this.toastr.success("Logged in!");
           this._isLoggedIn$.next(true);
         }
       })
       .catch((error) => {
         window.alert(error.message);
-        this.toastr.error("Error")
+        this.toastr.error("Check if your email and password are correct")
       });
   }
 
