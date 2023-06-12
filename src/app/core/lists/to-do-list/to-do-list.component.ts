@@ -15,8 +15,10 @@ import {ToDoList} from "../../../shared/models/to-do-list.model";
 import {ToastrService} from "ngx-toastr";
 import {Router} from "@angular/router";
 import {FilterSelectionEnum} from "../../../shared/models/filter-selection.enum";
-import {filter, Observable} from "rxjs";
+import {distinctUntilChanged, filter, map, Observable, Subject} from "rxjs";
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-to-do-list',
   templateUrl: './to-do-list.component.html',
@@ -48,6 +50,9 @@ export class ToDoListComponent implements OnInit {
   public doneItems?: ToDoList[];
   public activeItems?: ToDoList[];
   public filteringItem: string = 'All'
+  public itemFilter$: Subject<string> = new Subject<string>();
+  public filteredItems: ToDoList[] = [];
+  public isFiltering: boolean = false;
   private _categoryData: Category[] = [];
   private _updatedItem?: ToDoList;
 
@@ -75,6 +80,42 @@ export class ToDoListComponent implements OnInit {
 
   /*LIFECYCLES*/
   ngOnInit(): void {
+    this.toDoService.filteringItems$.subscribe({
+      next: filter => {
+        this.filteringItem = filter;
+      }
+    })
+
+    this.itemFilter$.pipe(
+      untilDestroyed(this),
+      filter(value => value.length > 2 || value === ""),
+      distinctUntilChanged(),
+      map(value => value.trim().toLocaleLowerCase())
+    ).subscribe(searchString => {
+      if (searchString === '') {
+        this.isFiltering = false;
+        this.filteredItems = [];
+      }
+      else {
+        this.isFiltering = true;
+        switch (this.filteringItem) {
+          case "All":
+            if(this.activeItems && this.doneItems)
+            this.filteredItems = [...this.activeItems, ...this.doneItems]
+              .filter(item => item.title.toLowerCase().includes(searchString));
+            console.log(this.filteredItems);
+            break;
+          case "Active":
+            if(this.activeItems)
+              this.filteredItems =this.activeItems.filter(item => item.title.toLowerCase().includes(searchString));
+            break;
+          case "Done":
+            if(this.doneItems)
+              this.filteredItems =this.doneItems.filter(item => item.title.toLowerCase().includes(searchString));
+            break;
+        }
+      }
+    });
   }
 
 
@@ -206,6 +247,15 @@ export class ToDoListComponent implements OnInit {
         }
       }
     });
+  }
+
+  public onFilterInput(value: string = ""): void {
+    this.itemFilter$.next(value);
+  }
+
+  public clearFilter(filterInput: HTMLInputElement): void {
+    filterInput.value = '';
+    this.itemFilter$.next('');
   }
 
 }

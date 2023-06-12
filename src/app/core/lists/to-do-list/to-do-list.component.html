@@ -1,4 +1,15 @@
 <div class="container">
+  <div class="filter">
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input matInput #filterInput autocomplete="off"
+             (keyup)="onFilterInput(filterInput.value)">
+    </mat-form-field>
+    <button mat-icon-button class="closeIcon" (click)="clearFilter(filterInput)">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
   <div class="category">
     {{openedCategory?.title}}
   </div>
@@ -28,28 +39,30 @@
       UNTIL
     </div>
   </div>
-  <ng-container *ngIf="openedCategory?.toDoList?.length! > 0; else empty">
-    <ng-container *ngFor="let item of activeItems">
-      <app-to-do-item *ngIf="filteringItem === 'Active' || filteringItem === 'All'"
-                      [title]="item?.title!"
-                      [text]="item?.text!" [until]="item?.doUntil!"
-                      [id]="item?.id!.toString()"
-                      [categoryId]="id"
-                      [isDone]="item?.isDone!"
-                      (deletedItem)="deletedToDoItem.emit($event)"
-                      (changedItem)="markAsDone($event)"
-      ></app-to-do-item>
-    </ng-container>
-    <ng-container *ngFor="let item of doneItems">
-      <app-to-do-item *ngIf="filteringItem === 'Done' || filteringItem === 'All'"
-                      [title]="item?.title!"
-                      [text]="item?.text!" [until]="item?.doUntil!"
-                      [id]="item?.id!.toString()"
-                      [categoryId]="id"
-                      [isDone]="item?.isDone!"
-                      (deletedItem)="deletedToDoItem.emit($event)"
-                      (changedItem)="markAsDone($event)"
-      ></app-to-do-item>
+  <ng-container *ngIf="!isFiltering; else filter">
+    <ng-container *ngIf="openedCategory?.toDoList?.length! > 0; else empty">
+      <ng-container *ngFor="let item of activeItems">
+        <app-to-do-item *ngIf="filteringItem === 'Active' || filteringItem === 'All'"
+                        [title]="item?.title!"
+                        [text]="item?.text!" [until]="item?.doUntil!"
+                        [id]="item?.id!.toString()"
+                        [categoryId]="id"
+                        [isDone]="item?.isDone!"
+                        (deletedItem)="deletedToDoItem.emit($event)"
+                        (changedItem)="markAsDone($event)"
+        ></app-to-do-item>
+      </ng-container>
+      <ng-container *ngFor="let item of doneItems">
+        <app-to-do-item *ngIf="filteringItem === 'Done' || filteringItem === 'All'"
+                        [title]="item?.title!"
+                        [text]="item?.text!" [until]="item?.doUntil!"
+                        [id]="item?.id!.toString()"
+                        [categoryId]="id"
+                        [isDone]="item?.isDone!"
+                        (deletedItem)="deletedToDoItem.emit($event)"
+                        (changedItem)="markAsDone($event)"
+        ></app-to-do-item>
+      </ng-container>
     </ng-container>
   </ng-container>
   <ng-template #empty>
@@ -83,4 +96,20 @@
       <button mat-raised-button color="primary" type="submit">Add</button>
     </div>
   </form>
+</ng-template>
+
+<ng-template #filter>
+  <ng-container *ngIf="openedCategory?.toDoList?.length! > 0; else empty">
+    <ng-container *ngFor="let item of filteredItems">
+      <app-to-do-item
+                      [title]="item?.title!"
+                      [text]="item?.text!" [until]="item?.doUntil!"
+                      [id]="item?.id!.toString()"
+                      [categoryId]="id"
+                      [isDone]="item?.isDone!"
+                      (deletedItem)="deletedToDoItem.emit($event)"
+                      (changedItem)="markAsDone($event)"
+      ></app-to-do-item>
+    </ng-container>
+  </ng-container>
 </ng-template>
