@@ -1,5 +1,23 @@
 <div class="header">
-  <div class="logo">TO DO APP</div>
+  <div class="filter">
+    <div class="logo">TO DO APP</div>
+    <div class="select">
+      <mat-form-field>
+        <mat-label>Filter for to-do items</mat-label>
+        <mat-select (valueChange)="onChangeFilter($event)" [value]="selectedFilter">
+          <mat-option [value]="'Active'" (onSelectionChange)="onChangeFilter('Active')">
+            Active
+          </mat-option>
+          <mat-option [value]="'Done'" (onSelectionChange)="onChangeFilter('Done')">
+            Done
+          </mat-option>
+          <mat-option [value]="'All'" (onSelectionChange)="onChangeFilter('All')">
+            All
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
   <div class="button" *ngIf="authService.isLoggedIn$ | async">
     <button mat-icon-button (click)="logoutUser()">
       <mat-icon>logout</mat-icon>

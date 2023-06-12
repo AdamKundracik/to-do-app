@@ -9,12 +9,10 @@ export class CategoryItemComponent implements OnInit {
 
   @Input() title: String = ""
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
 
-  public log() {
-    console.log("clicked")
-  }
 }

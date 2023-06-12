@@ -3,14 +3,18 @@
     {{openedCategory?.title}}
   </div>
   <div class="add-button">
-    <button mat-mini-fab color="primary" class="back" [routerLink]="['/']">
+    <button mat-mini-fab color="primary" [routerLink]="['/']" [matTooltip]="'return to categories'">
       <mat-icon>undo</mat-icon>
     </button>
-    <button mat-mini-fab color="primary" (click)="openTempDialog()">
+    <button mat-mini-fab color="primary" class="plus" (click)="openTempDialog()" [matTooltip]="'Add new to-do item'">
       <mat-icon>add</mat-icon>
     </button>
+    <button mat-mini-fab color="warn" (click)="onDeleteCategory(id)"
+            [matTooltip]="'Delete category ' + openedCategory?.title">
+      <mat-icon>delete</mat-icon>
+    </button>
   </div>
-  <div class="legend-row">
+  <div class="legend-row" *ngIf="openedCategory?.toDoList?.length! > 0">
     <div class="title">
       TITLE
     </div>
@@ -24,42 +28,35 @@
       UNTIL
     </div>
   </div>
-  <ng-container *ngFor="let item of openedCategory?.toDoList">
-    <app-to-do-item
-    [title]="item?.title!"
-    [text]="item?.text!" [until]="item?.doUntil!"
-    [id]="item?.id!.toString()"
-    [categoryId]="id"
-    [isDone]="item?.isDone!"
-    (deletedItem)="deletedToDoItem.emit($event)"
-    (changedItem)="markAsDone($event)"
-    ></app-to-do-item>
+  <ng-container *ngIf="openedCategory?.toDoList?.length! > 0; else empty">
+    <ng-container *ngFor="let item of activeItems">
+      <app-to-do-item *ngIf="filteringItem === 'Active' || filteringItem === 'All'"
+                      [title]="item?.title!"
+                      [text]="item?.text!" [until]="item?.doUntil!"
+                      [id]="item?.id!.toString()"
+                      [categoryId]="id"
+                      [isDone]="item?.isDone!"
+                      (deletedItem)="deletedToDoItem.emit($event)"
+                      (changedItem)="markAsDone($event)"
+      ></app-to-do-item>
+    </ng-container>
+    <ng-container *ngFor="let item of doneItems">
+      <app-to-do-item *ngIf="filteringItem === 'Done' || filteringItem === 'All'"
+                      [title]="item?.title!"
+                      [text]="item?.text!" [until]="item?.doUntil!"
+                      [id]="item?.id!.toString()"
+                      [categoryId]="id"
+                      [isDone]="item?.isDone!"
+                      (deletedItem)="deletedToDoItem.emit($event)"
+                      (changedItem)="markAsDone($event)"
+      ></app-to-do-item>
+    </ng-container>
   </ng-container>
-<!--TODO: Separate Done and not done items using Inputs-->
-<!--  <div>-->
-<!--    NOT DONE-->
-<!--    <ng-container *ngFor="let item of openedCategory?.toDoList">-->
-<!--      <app-to-do-item *ngIf="!item.isDone"-->
-<!--                      [title]="item?.title!"-->
-<!--                      [text]="item?.text!" [until]="item?.doUntil!"-->
-<!--                      [id]="item?.id!.toString()"-->
-<!--                      [categoryId]="id"-->
-<!--                      (deletedItem)="deletedToDoItem.emit($event)"-->
-<!--      ></app-to-do-item>-->
-<!--    </ng-container>-->
-<!--  </div>-->
-<!--  <div>-->
-<!--    DONE-->
-<!--    <ng-container *ngFor="let item of openedCategory?.toDoList">-->
-<!--      <app-to-do-item *ngIf="item.isDone"-->
-<!--                      [title]="item?.title!"-->
-<!--                      [text]="item?.text!" [until]="item?.doUntil!"-->
-<!--                      [id]="item?.id!.toString()"-->
-<!--                      [categoryId]="id"-->
-<!--                      (deletedItem)="deletedToDoItem.emit($event)"-->
-<!--      ></app-to-do-item>-->
-<!--    </ng-container>-->
-<!--  </div>-->
+  <ng-template #empty>
+    <div class="empty-container">
+      <span>You have no to do items. Click "+" to create one</span>
+    </div>
+  </ng-template>
 </div>
 
 <ng-template #dialogRef>

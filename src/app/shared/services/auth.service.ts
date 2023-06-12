@@ -1,8 +1,10 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {BehaviorSubject, Observable} from "rxjs";
+import {JwtHelperService} from "@auth0/angular-jwt";
+
 
 @Injectable({
   providedIn: 'root'
@@ -13,14 +15,16 @@ export class AuthService {
   public isLoggedIn$: Observable<boolean> = this._isLoggedIn$.asObservable();
 
   private static TOKEN_KEY = `token`;
+
   constructor(
     private readonly afAuth: AngularFireAuth,
     private readonly router: Router,// Inject Firebase auth service
-  private readonly toastr: ToastrService,
+    private readonly toastr: ToastrService,
+  ) {
+    if (this.getToken()) this._isLoggedIn$.next(true);
+  }
 
-) {}
-
-  getToken() {
+  getToken(): string | null {
     return localStorage.getItem(AuthService.TOKEN_KEY);
   }
 
@@ -41,8 +45,9 @@ export class AuthService {
         this.toastr.error("Check if your email and password are correct")
       });
   }
+
   // Sign in with email/password
- public SignIn(email: string, password: string) {
+  public SignIn(email: string, password: string) {
     return this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
@@ -61,7 +66,7 @@ export class AuthService {
   logoutUser() {
     localStorage.removeItem(AuthService.TOKEN_KEY);
     this._isLoggedIn$.next(false);
-    this.router.navigate(['/','auth','sign-in']);
+    this.router.navigate(['/', 'auth', 'sign-in']);
     this.toastr.success("You have been logged out successfully");
   }
 

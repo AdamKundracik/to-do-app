@@ -1,15 +1,16 @@
 <div class="container">
   <ng-container *ngIf="param === ''; else list">
     <app-to-do-category [categoryData]="categoryData"
-    (addedCategory)="addToCategories($event)"
+                        (addedCategory)="addToCategories($event)"
     ></app-to-do-category>
   </ng-container>
 
   <ng-template #list>
-    <app-to-do-list [categoryData]="categoryData"
-                    [id]="param"
-    (toDoItem)="addToList($event)"
-    (deletedToDoItem)="deleteFromList($event)"
+    <app-to-do-list
+      [categoryData]="categoryData"
+      [id]="param"
+      (toDoItem)="addToList($event)"
+      (deletedToDoItem)="deleteFromList($event)"
     >
     </app-to-do-list>
   </ng-template>

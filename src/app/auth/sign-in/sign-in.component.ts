@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {AuthService} from "../../shared/services/auth.service";
 import {Router} from "@angular/router";
@@ -13,9 +13,10 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly  authService: AuthService,
+    private readonly authService: AuthService,
     private readonly router: Router,
-  ) { }
+  ) {
+  }
 
   public signInForm = this.fb.group({
     email: ['', Validators.required],

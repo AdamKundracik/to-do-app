@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {ToDoService} from "../../shared/services/to-do.service";
-import {Category} from "../models/category.model";
-import {ToDoList} from "../models/toDoList.model";
+import {Category} from "../../shared/models/category.model";
+import {ToDoList} from "../../shared/models/to-do-list.model";
 
 @Component({
   selector: 'app-lists',
@@ -13,10 +13,12 @@ export class ListsComponent implements OnInit {
 
   public param: string = "";
   public categoryData: Category[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private toDoService: ToDoService
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {
@@ -38,7 +40,7 @@ export class ListsComponent implements OnInit {
     if (categoryIndex !== -1) {
       const category = this.categoryData[categoryIndex];
       const updatedToDoList = [...category.toDoList, item];
-      const updatedCategory = { ...category, toDoList: updatedToDoList };
+      const updatedCategory = {...category, toDoList: updatedToDoList};
       const updatedCategoryData = [...this.categoryData];
       updatedCategoryData[categoryIndex] = updatedCategory;
       this.categoryData = updatedCategoryData;
@@ -51,7 +53,7 @@ export class ListsComponent implements OnInit {
     if (categoryIndex !== -1) {
       const category = this.categoryData[categoryIndex];
       const updatedToDoList = category.toDoList.filter(item => item.id !== deletedItem.id);
-      const updatedCategory = { ...category, toDoList: updatedToDoList };
+      const updatedCategory = {...category, toDoList: updatedToDoList};
       const updatedCategoryData = [...this.categoryData];
       updatedCategoryData[categoryIndex] = updatedCategory;
       this.categoryData = updatedCategoryData;

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CategoryItemComponent } from './category-item.component';
+import {CategoryItemComponent} from './category-item.component';
 
 describe('CategoryItemComponent', () => {
   let component: CategoryItemComponent;
@@ -8,9 +8,9 @@ describe('CategoryItemComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CategoryItemComponent ]
+      declarations: [CategoryItemComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

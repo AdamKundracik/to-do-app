@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
 import {RouterModule, Routes} from "@angular/router";
 import {ListsComponent} from "../core/lists/lists.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
@@ -24,4 +24,5 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule {
+}

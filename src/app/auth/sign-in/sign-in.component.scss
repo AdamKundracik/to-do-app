@@ -24,15 +24,18 @@
     }
 
     .mat-card-footer {
-     display: flex;
+      display: flex;
       flex-direction: column;
       margin: auto;
+
       .button {
         margin: auto;
       }
+
       .info {
         margin-bottom: 8px;
       }
+
       u {
         color: blue;
         cursor: pointer;

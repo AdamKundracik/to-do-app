@@ -12,8 +12,14 @@
 
   .add-button {
     margin: 0 auto;
-    .back {
-      margin-right: 4px;
+    margin-bottom: 15px;
+
+    .mat-icon {
+      transform: translateY(-1px);
+    }
+
+    .plus {
+      margin: 0 5px;
     }
   }
 }
@@ -84,6 +90,17 @@ mat-label {
   color: white;
 }
 
+.empty-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  span {;
+    color: white;
+    font-size: 32px;
+  }
+}
+
 
 @media only screen and (max-width: 768px) {
   .container {
@@ -92,6 +109,12 @@ mat-label {
 
   .delete {
     margin-left: 5px;
+  }
+
+  .empty-container {
+    span {;
+      font-size: 24px;
+    }
   }
 }
 

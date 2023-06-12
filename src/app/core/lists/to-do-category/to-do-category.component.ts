@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
-import {Category} from "../../models/category.model";
+import {Category} from "../../../shared/models/category.model";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
@@ -23,7 +23,8 @@ export class ToDoCategoryComponent implements OnInit {
     private readonly fb: FormBuilder,
     private readonly toDoService: ToDoService,
     private readonly toastr: ToastrService
-  ) { }
+  ) {
+  }
 
   public createCategoryForm: FormGroup = this.fb.group({
     title: new FormControl('', [Validators.required]),
