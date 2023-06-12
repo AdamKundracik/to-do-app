@@ -8,7 +8,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {ToastrModule} from "ngx-toastr";
 import {AngularFireModule} from '@angular/fire/compat';
 import {AngularFireAuthModule} from '@angular/fire/compat/auth';
-import {environment} from "../environments/environment";
+import {environment} from "../environments/environment.prod";
 import {AuthModule} from "./auth/auth.module";
 import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";

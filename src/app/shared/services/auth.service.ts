@@ -3,8 +3,6 @@ import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {Router} from "@angular/router";
 import {ToastrService} from "ngx-toastr";
 import {BehaviorSubject, Observable} from "rxjs";
-import {JwtHelperService} from "@auth0/angular-jwt";
-
 
 @Injectable({
   providedIn: 'root'
